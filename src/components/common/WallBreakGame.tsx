@@ -76,7 +76,6 @@ export default function WallBreakGame() {
         )}
         <div className="wall-reveal-copy">
           <span className="wall-reveal-kicker">ORIGINAL MODEL</span>
-          <strong className="wall-reveal-name">Mika</strong>
           <span className="wall-reveal-subtitle">3D portrait</span>
         </div>
       </div>

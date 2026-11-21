@@ -6,11 +6,23 @@ import { sitePages } from '@/data/site'
 
 type TransitionPhase = 'idle' | 'cover' | 'reveal'
 
-const COVER_MS = 200
-const REVEAL_MS = 240
-const MAX_TOTAL_MS = 700
-const REDUCED_STEP_MS = 75
-const REDUCED_MAX_TOTAL_MS = 150
+const TRANSITION_COLUMNS = 6
+const TRANSITION_ROWS = 8
+const TRANSITION_TILES = Array.from(
+  { length: TRANSITION_COLUMNS * TRANSITION_ROWS },
+  (_, index) => {
+    const column = index % TRANSITION_COLUMNS
+    const row = Math.floor(index / TRANSITION_COLUMNS)
+    const columnOffset = (column % 3) * 4
+    return { index, delay: row * 18 + columnOffset }
+  },
+)
+
+const COVER_MS = 420
+const REVEAL_MS = 420
+const MAX_TOTAL_MS = 1500
+const REDUCED_STEP_MS = 100
+const REDUCED_MAX_TOTAL_MS = 250
 
 function normalizedPath(pathname: string) {
   return pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
@@ -25,7 +37,6 @@ export default function PageTransitions() {
   const router = useRouter()
   const [phase, setPhase] = useState<TransitionPhase>('idle')
   const [destinationLabel, setDestinationLabel] = useState('')
-  const [panelDuration, setPanelDuration] = useState(COVER_MS)
   const locked = useRef(false)
   const pendingPath = useRef<string | null>(null)
   const previousPath = useRef(pathname)
@@ -120,7 +131,6 @@ export default function PageTransitions() {
       transitionStartedAt.current = performance.now()
 
       setDestinationLabel(`${pageNumber} — ${pageName || 'Page'}`)
-      setPanelDuration(coverDuration)
       setPhase('cover')
 
       // Route changes only after the panel has fully covered the page, so the
@@ -169,7 +179,6 @@ export default function PageTransitions() {
       Math.max(0, transitionDeadline.current - elapsed),
     )
 
-    setPanelDuration(revealDuration)
     setPhase('reveal')
     revealTimer.current = window.setTimeout(finishTransition, revealDuration)
   }, [clearTimers, finishTransition, pathname])
@@ -179,9 +188,20 @@ export default function PageTransitions() {
       aria-hidden="true"
       className="page-transition-panel"
       data-phase={phase}
-      style={{ transitionDuration: `${panelDuration}ms` }}
     >
-      <p>{destinationLabel}</p>
+      <div className="page-transition-grid">
+        {TRANSITION_TILES.map(({ index, delay }) => (
+          <span
+            key={index}
+            className="page-transition-tile"
+            style={{ transitionDelay: `${delay}ms` }}
+          />
+        ))}
+      </div>
+      <div className="page-transition-title">
+        <span>Now entering</span>
+        <p>{destinationLabel}</p>
+      </div>
     </div>
   )
 }
