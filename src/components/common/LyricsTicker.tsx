@@ -140,7 +140,7 @@ export default function LyricsTicker() {
 
   return (
     <div
-      className="flex w-48 min-w-0 max-w-[calc(100vw-14rem)] items-center gap-2 text-muted"
+      className="flex w-48 min-w-0 max-w-[calc(100vw-3rem)] items-center gap-2 text-muted"
       title={text}
       aria-label={`Lirik lagu: ${text}`}
     >

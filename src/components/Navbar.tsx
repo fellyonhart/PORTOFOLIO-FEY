@@ -1,15 +1,15 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import type { Social } from '@/data/types'
 import LyricsTicker from '@/components/common/LyricsTicker'
+import SocialIcon from '@/components/common/SocialIcon'
 
 type NavbarProps = {
-  socials: Pick<Social, 'name' | 'href' | 'icon'>[]
+  socials: Pick<Social, 'name' | 'href'>[]
 }
 
 const navLinks = [
@@ -22,6 +22,7 @@ const navLinks = [
 
 export default function Navbar({ socials }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [compactNavVisible, setCompactNavVisible] = useState(false)
   const pathname = usePathname()
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -33,11 +34,46 @@ export default function Navbar({ socials }: NavbarProps) {
     setMenuOpen(false)
   }, [pathname])
 
+  useEffect(() => {
+    let previousScrollY = window.scrollY
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (window.innerWidth < 1024 || currentScrollY <= 96) {
+        setCompactNavVisible(false)
+      } else if (currentScrollY > previousScrollY) {
+        setCompactNavVisible(true)
+      } else if (currentScrollY < previousScrollY) {
+        setCompactNavVisible(false)
+      }
+      previousScrollY = currentScrollY
+    }
+
+    const handleResize = () => {
+      setCompactNavVisible(window.innerWidth >= 1024 && window.scrollY > 96)
+      previousScrollY = window.scrollY
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const isDark = mounted && resolvedTheme !== 'light'
 
   return (
     <>
-      <nav className="navbar-surface sticky top-0 z-50 flex items-center justify-between px-6 py-4 md:px-10">
+      <nav
+        className={`navbar-surface sticky top-0 z-50 flex flex-wrap items-center justify-between gap-y-2 px-3 py-3 transition-all duration-300 motion-reduce:transition-none md:px-8 md:py-4 ${
+          compactNavVisible
+            ? 'lg:pointer-events-none lg:-translate-y-full lg:opacity-0'
+            : 'lg:translate-y-0 lg:opacity-100'
+        }`}
+      >
         {/* Logo */}
         <Link
           href="/"
@@ -48,7 +84,7 @@ export default function Navbar({ socials }: NavbarProps) {
         </Link>
 
         {/* Desktop nav links */}
-        <ul className="order-1 hidden items-center gap-1 md:flex lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+        <ul className="order-1 hidden items-center gap-1 lg:absolute lg:left-1/2 lg:top-1/2 lg:flex lg:-translate-x-1/2 lg:-translate-y-1/2">
           {navLinks.map(({ href, label }) => {
             const active = pathname === href
             return (
@@ -70,13 +106,26 @@ export default function Navbar({ socials }: NavbarProps) {
         </ul>
 
         {/* Right controls */}
-        <div className="order-2 flex items-center gap-2 lg:contents">
+        <div className="order-2 ml-auto flex items-center gap-2 lg:contents">
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-card text-ink shadow-soft transition-transform hover:rotate-90 lg:hidden"
+          >
+            <i
+              className={`fa-solid text-sm ${menuOpen ? 'fa-xmark' : 'fa-bars'}`}
+            />
+          </button>
+
           {/* Theme toggle — Font Awesome CDN */}
           <button
             type="button"
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="order-3 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-pearl text-ink shadow-soft transition-transform hover:rotate-12"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-pearl text-ink shadow-soft transition-transform hover:rotate-12"
           >
             {mounted &&
               (isDark ? (
@@ -91,29 +140,75 @@ export default function Navbar({ socials }: NavbarProps) {
                 />
               ))}
           </button>
+        </div>
 
-          <div className="order-2 translate-x-1 lg:absolute lg:left-[77.5%] lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+        {!compactNavVisible && (
+          <div className="order-3 flex w-full basis-full justify-center py-1 lg:absolute lg:left-[77.5%] lg:top-1/2 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:py-0">
             <LyricsTicker />
           </div>
-
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="order-1 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card text-ink shadow-soft transition-transform hover:rotate-90 md:hidden"
-          >
-            <i
-              className={`fa-solid text-sm ${menuOpen ? 'fa-xmark' : 'fa-bars'}`}
-            />
-          </button>
-        </div>
+        )}
       </nav>
+
+      <div
+        aria-label="Compact navigation"
+        className={`bg-card/90 fixed left-1/2 top-3 z-[60] hidden max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-3 rounded-full border border-line px-4 py-2 shadow-soft backdrop-blur-xl transition-all duration-300 motion-reduce:transition-none lg:flex ${
+          compactNavVisible
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-4 opacity-0'
+        }`}
+      >
+        <Link
+          href="/"
+          className="shrink-0 font-mono text-xs font-semibold text-gold"
+          aria-label="Home"
+        >
+          Feyy.Dev
+        </Link>
+        <ul className="flex items-center gap-1">
+          {navLinks.map(({ href, label }) => {
+            const active = pathname === href
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`rounded-full px-2 py-1 text-xs font-semibold transition-colors ${
+                    active
+                      ? 'bg-tech-tag text-ink'
+                      : 'text-muted hover:text-gold-deep'
+                  }`}
+                >
+                  {label}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+        <LyricsTicker />
+        <button
+          type="button"
+          onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-pearl text-ink transition-transform hover:rotate-12"
+        >
+          {mounted &&
+            (isDark ? (
+              <i
+                className="fa-solid fa-sun text-sm"
+                style={{ color: '#e0c46c' }}
+              />
+            ) : (
+              <i
+                className="fa-solid fa-moon text-sm"
+                style={{ color: '#5b7488' }}
+              />
+            ))}
+        </button>
+      </div>
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 transition-all duration-300 lg:hidden ${
           menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
@@ -176,12 +271,7 @@ export default function Navbar({ socials }: NavbarProps) {
                     aria-label={social.name}
                     className="text-muted transition-colors hover:text-gold-deep"
                   >
-                    <Image
-                      src={social.icon}
-                      alt={social.name}
-                      width={20}
-                      height={20}
-                    />
+                    <SocialIcon name={social.name} />
                   </a>
                 ))}
             </div>

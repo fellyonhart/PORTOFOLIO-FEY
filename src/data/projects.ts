@@ -79,4 +79,24 @@ export const projects: Project[] = [
     year: 2026,
     repo: 'https://github.com/fellyonhart/hand-love',
   },
+  {
+    title: 'PPLG Virtual Lab',
+    description:
+      'An interactive JavaScript learning lab with loop simulations, visual traces, quizzes, and XP-based progress.',
+    type: 'Web',
+    tech: ['JavaScript'],
+    featured: true,
+    year: 2026,
+    demo: 'https://pplglab.vercel.app/labvirtual.html?view=lab',
+  },
+  {
+    title: 'Kelompok 3 — Hasil Pembelajaran',
+    description:
+      'A group learning portal for Mathematics, PAIBP, and Islamic history, with class data lookup and member profiles.',
+    type: 'Web',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    featured: true,
+    year: 2026,
+    demo: 'https://klompoktilu.vercel.app/index.html',
+  },
 ]

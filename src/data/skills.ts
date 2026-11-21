@@ -21,4 +21,5 @@ export const skills: Skill[] = [
   { name: 'MongoDB' },
   { name: 'MySQL' },
   { name: 'PostgreSQL' },
+  { name: 'SQLite' },
 ]

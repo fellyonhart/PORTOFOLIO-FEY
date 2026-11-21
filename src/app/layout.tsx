@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const navbarSocials = socials
   .filter((s) => s.href)
   .slice(0, 5)
-  .map(({ name, href, icon }) => ({ name, href, icon }))
+  .map(({ name, href }) => ({ name, href }))
 
 export default function RootLayout({
   children,
@@ -82,7 +82,7 @@ export default function RootLayout({
                   <main
                     id="main-content"
                     tabIndex={-1}
-                    className="mx-auto mb-16 max-w-6xl px-5 outline-none md:px-8"
+                    className="mx-auto mb-16 max-w-6xl px-3 pb-20 outline-none md:px-8 md:pb-0"
                   >
                     {children}
                     <NextPageLink />

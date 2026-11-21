@@ -8,7 +8,7 @@ export default function ProjectPage() {
 
   return (
     <section className="mx-auto max-w-5xl py-12">
-      <p className="text-ice mb-4 font-mono text-xs uppercase tracking-[0.2em]">
+      <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-ice">
         {'// projects'}
       </p>
       <h1 className="mb-3 text-3xl font-bold text-ink md:text-5xl">
@@ -48,14 +48,14 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
     project.demo && project.demo !== 'none' ? project.demo : project.repo
 
   return (
-    <article className="card-hover border-line-2 bg-bg-2 group flex flex-col rounded-lg border p-6">
+    <article className="card-hover group flex flex-col rounded-lg border border-line-2 bg-bg-2 p-4 sm:p-6">
       {/* Type badge */}
       <span className="text-ice/70 mb-4 self-start font-mono text-xs">
         {project.type?.toLowerCase() ?? 'project'}
       </span>
 
       {/* Title */}
-      <h2 className="group-hover:text-ice mb-2 text-lg font-bold text-ink transition-colors">
+      <h2 className="mb-2 text-lg font-bold text-ink transition-colors group-hover:text-ice">
         {project.title}
       </h2>
 
@@ -85,7 +85,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
             href={openHref}
             target="_blank"
             rel="noreferrer"
-            className="text-ice flex items-center gap-1 hover:underline"
+            className="flex items-center gap-1 text-ice hover:underline"
           >
             Live Demo
             <i className="fa-solid fa-arrow-up-right-from-square text-[10px]" />
@@ -96,14 +96,14 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
             href={project.repo}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-ice flex items-center gap-1 text-muted"
+            className="flex items-center gap-1 text-muted hover:text-ice"
           >
             <i className="fa-brands fa-github text-xs" />
             Source
           </a>
         )}
         {project.year && (
-          <span className="text-muted-2 ml-auto">{project.year}</span>
+          <span className="ml-auto text-muted-2">{project.year}</span>
         )}
       </div>
     </article>
@@ -117,7 +117,7 @@ function ArchiveRow({ project }: { project: (typeof projects)[number] }) {
   return (
     <div className="project-row flex items-center justify-between gap-4 py-4">
       <div className="flex items-center gap-4">
-        <span className="text-muted-2 font-mono text-xs">{project.year}</span>
+        <span className="font-mono text-xs text-muted-2">{project.year}</span>
         <span className="text-sm font-semibold text-ink">{project.title}</span>
         {project.tech?.slice(0, 3).map((t) => (
           <span
@@ -133,7 +133,7 @@ function ArchiveRow({ project }: { project: (typeof projects)[number] }) {
           href={href}
           target="_blank"
           rel="noreferrer"
-          className="hover:text-ice shrink-0 font-mono text-xs text-muted"
+          className="shrink-0 font-mono text-xs text-muted hover:text-ice"
           aria-label={`Open ${project.title}`}
         >
           <i className="fa-solid fa-arrow-up-right-from-square" />

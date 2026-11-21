@@ -17,6 +17,7 @@ import {
   SiPostgresql,
   SiPython,
   SiReact,
+  SiSqlite,
   SiTailwindcss,
   SiTypescript,
 } from 'react-icons/si'
@@ -44,6 +45,7 @@ const technologyIcons: Record<string, IconType> = {
   postgresql: SiPostgresql,
   python: SiPython,
   react: SiReact,
+  sqlite: SiSqlite,
   tailwind: SiTailwindcss,
   tailwindcss: SiTailwindcss,
   tailwinds: SiTailwindcss,

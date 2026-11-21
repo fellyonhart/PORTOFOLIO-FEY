@@ -7,7 +7,7 @@ import { socials } from '@/data/socials'
 import { profile } from '@/data/profile'
 
 // Keyboard shortcut display helper
-function KbdBadge({ keys, isDark }: { keys: string[]; isDark: boolean }) {
+function KbdBadge({ keys }: { keys: string[] }) {
   return (
     <span
       style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}
@@ -18,11 +18,11 @@ function KbdBadge({ keys, isDark }: { keys: string[]; isDark: boolean }) {
           style={{
             fontSize: 10,
             padding: '1px 5px',
-            background: isDark ? '#0C1F35' : '#F0F0F0',
-            border: `1px solid ${isDark ? '#2A3F55' : '#D0D0D0'}`,
+            background: 'var(--card-2)',
+            border: '1px solid var(--line)',
             borderBottomWidth: 2,
             borderRadius: 4,
-            color: isDark ? '#8BA3BC' : '#666',
+            color: 'var(--muted)',
             fontFamily: "'Fira Code', monospace",
             lineHeight: '18px',
             userSelect: 'none',
@@ -59,8 +59,8 @@ function Highlight({ text, query }: { text: string; query: string }) {
       {text.slice(0, idx)}
       <mark
         style={{
-          background: 'rgba(67,217,173,0.25)',
-          color: '#43D9AD',
+          background: 'var(--tech-tag)',
+          color: 'var(--gold-deep)',
           borderRadius: 2,
           padding: '0 1px',
         }}
@@ -73,15 +73,7 @@ function Highlight({ text, query }: { text: string; query: string }) {
 }
 
 // Toast notification
-function Toast({
-  message,
-  visible,
-  isDark,
-}: {
-  message: string
-  visible: boolean
-  isDark: boolean
-}) {
+function Toast({ message, visible }: { message: string; visible: boolean }) {
   return (
     <div
       style={{
@@ -93,9 +85,9 @@ function Toast({
         transition: 'all 0.25s cubic-bezier(0.34,1.56,0.64,1)',
         zIndex: 99999,
         pointerEvents: 'none',
-        background: isDark ? '#011221' : '#1A202C',
-        color: isDark ? '#43D9AD' : '#43D9AD',
-        border: '1px solid rgba(67,217,173,0.3)',
+        background: 'var(--card)',
+        color: 'var(--gold-deep)',
+        border: '1px solid var(--line)',
         borderRadius: 8,
         padding: '8px 16px',
         fontSize: 13,
@@ -119,29 +111,9 @@ export default function CommandPalette() {
   const [chordPending, setChordPending] = useState('')
   const [chordHint, setChordHint] = useState('')
   const [toast, setToast] = useState({ visible: false, message: '' })
-  const [isDark, setIsDark] = useState(false)
-
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
   const chordTimer = useRef<NodeJS.Timeout | null>(null)
-
-  // Detect theme
-  useEffect(() => {
-    const checkTheme = () => {
-      const html = document.documentElement
-      setIsDark(
-        html.classList.contains('dark') ||
-          html.classList.contains('vscode-dark'),
-      )
-    }
-    checkTheme()
-    const observer = new MutationObserver(checkTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
-    return () => observer.disconnect()
-  }, [])
 
   // Build commands
   const buildCommands = useCallback((): Command[] => {
@@ -382,13 +354,13 @@ export default function CommandPalette() {
   })
 
   // Theme tokens
-  const border = isDark ? '#1E2D3D' : '#E0E0E0'
-  const bg = isDark ? '#011627' : '#FFFFFF'
-  const bgSub = isDark ? '#011221' : '#F8F8F8'
-  const bgHov = isDark ? '#0C1F35' : '#F0F7FF'
-  const text = isDark ? '#E5E9F0' : '#1A202C'
-  const muted = isDark ? '#607B96' : '#6B7280'
-  const accent = '#43D9AD'
+  const border = 'var(--line)'
+  const bg = 'var(--bg)'
+  const bgSub = 'var(--card-2)'
+  const bgHov = 'var(--tech-tag)'
+  const text = 'var(--ink)'
+  const muted = 'var(--muted)'
+  const accent = 'var(--gold)'
 
   return (
     <>
@@ -400,9 +372,9 @@ export default function CommandPalette() {
             bottom: 32,
             right: 32,
             zIndex: 99998,
-            background: isDark ? '#011221' : '#1A202C',
+            background: 'var(--card)',
             color: accent,
-            border: `1px solid ${accent}40`,
+            border: `1px solid ${border}`,
             borderRadius: 8,
             padding: '8px 14px',
             fontSize: 13,
@@ -418,7 +390,7 @@ export default function CommandPalette() {
       )}
 
       {/* Toast */}
-      <Toast message={toast.message} visible={toast.visible} isDark={isDark} />
+      <Toast message={toast.message} visible={toast.visible} />
 
       {/* Trigger button */}
       {!open && (
@@ -426,7 +398,7 @@ export default function CommandPalette() {
           onClick={() => setOpen(true)}
           title="Open command palette (⌘K or Ctrl+K)"
           aria-label="Open command palette"
-          className="fixed bottom-8 right-8 z-50 flex items-center gap-2 rounded-full border border-gold bg-gold px-4 py-3 text-bg shadow-soft transition-all hover:scale-105 hover:border-gold-deep hover:bg-gold-deep md:bottom-16 md:right-16"
+          className="fixed bottom-20 right-2 z-50 flex items-center gap-2 rounded-full border border-line bg-card px-4 py-3 text-ink shadow-soft transition-all hover:scale-105 hover:border-gold hover:text-gold-deep md:bottom-16 md:right-16"
         >
           <i className="fa-solid fa-magnifying-glass" aria-hidden="true" />
           <span className="hidden text-sm font-medium md:inline">Search</span>
@@ -468,9 +440,7 @@ export default function CommandPalette() {
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
-              boxShadow: isDark
-                ? '0 24px 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(67,217,173,0.08)'
-                : '0 24px 64px rgba(0,0,0,0.2)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.28)',
               animation: 'cp-slide-in 0.18s cubic-bezier(0.34,1.56,0.64,1)',
             }}
           >
@@ -605,11 +575,7 @@ export default function CommandPalette() {
                             gap: 12,
                             padding: '9px 16px',
                             cursor: 'pointer',
-                            background: isActive
-                              ? isDark
-                                ? 'linear-gradient(90deg, rgba(67,217,173,0.08) 0%, rgba(67,217,173,0.02) 100%)'
-                                : bgHov
-                              : 'transparent',
+                            background: isActive ? bgHov : 'transparent',
                             borderLeft: `3px solid ${isActive ? accent : 'transparent'}`,
                             transition: 'background 0.1s ease',
                           }}
@@ -620,16 +586,12 @@ export default function CommandPalette() {
                               width: 34,
                               height: 34,
                               borderRadius: 8,
-                              border: `1px solid ${isActive ? accent + '40' : border}`,
+                              border: `1px solid ${isActive ? accent : border}`,
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               fontSize: 15,
-                              background: isActive
-                                ? isDark
-                                  ? 'rgba(67,217,173,0.08)'
-                                  : 'rgba(77,91,206,0.08)'
-                                : bgSub,
+                              background: isActive ? bgHov : bgSub,
                               flexShrink: 0,
                               transition: 'all 0.1s ease',
                             }}
@@ -642,11 +604,7 @@ export default function CommandPalette() {
                             <div
                               style={{
                                 fontSize: 13,
-                                color: isActive
-                                  ? isDark
-                                    ? '#fff'
-                                    : '#111'
-                                  : text,
+                                color: text,
                                 fontFamily: "'Fira Code', monospace",
                                 fontWeight: isActive ? 500 : 400,
                               }}
@@ -668,14 +626,9 @@ export default function CommandPalette() {
                           </div>
 
                           {/* Shortcut badge */}
-                          {cmd.shortcut && (
-                            <KbdBadge keys={cmd.shortcut} isDark={isDark} />
-                          )}
+                          {cmd.shortcut && <KbdBadge keys={cmd.shortcut} />}
                           {cmd.chord && !cmd.shortcut && (
-                            <KbdBadge
-                              keys={cmd.chord.split('')}
-                              isDark={isDark}
-                            />
+                            <KbdBadge keys={cmd.chord.split('')} />
                           )}
                         </div>
                       )
@@ -715,7 +668,7 @@ export default function CommandPalette() {
                       color: muted,
                     }}
                   >
-                    <KbdBadge keys={keys} isDark={isDark} />
+                    <KbdBadge keys={keys} />
                     <span>{label}</span>
                   </div>
                 ))}

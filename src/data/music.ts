@@ -16,6 +16,7 @@ export const musicTracks: MusicTrack[] = [
   {
     src: '/music/For All the Dreams That Wings Could Fly.m4a',
     title: 'For All the Dreams That Wings Could Fly',
+    artist: 'the milo'
   },
   {
     src: '/music/eleventwelfth feat. asteriska - your head as my favourite bookstore.m4a',
@@ -31,5 +32,30 @@ export const musicTracks: MusicTrack[] = [
     src: '/music/Would You Stay With Me - Snuzzle.m4a',
     title: 'Would You Stay With Me',
     artist: 'Snuzzle',
+  },
+  {
+    src: '/public/music/Lana Del Rey - Brooklyn Baby (Lyrics).mp3',
+    title: 'Brooklyn Baby',
+    artist: 'Lana del rey',
+  },
+  {
+    src: '/public/music/Lana Del Rey Playlist Top Songs Collection Dreamy & Aesthetic.mp3',
+    title: 'Playlist Lana',
+    artist: 'Lana del rey',
+  },
+  {
+    src: '/public/music/Lil Tjay - Calling My Phone (feat. 6LACK) [Official Video].mp3',
+    title: 'Calling My Phone',
+    artist: 'Lil Tjay',
+  },
+  {
+    src: '/public/music/Lil Tjay - What You Wanna Do (Official Audio).mp3',
+    title: 'What you wanna do',
+    artist: 'Lil Tjay',
+  },
+  {
+    src: '/public/music/XXXTENTACION - whoa (mind in awe) (Audio).mp3',
+    title: 'Whoa ',
+    artist: 'XXXTENTACTION',
   },
 ]

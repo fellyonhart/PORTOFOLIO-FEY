@@ -74,6 +74,5 @@ export type Skill = {
 export type Social = {
   name: string
   href?: string
-  icon: LocalIcon
   content?: string
 }

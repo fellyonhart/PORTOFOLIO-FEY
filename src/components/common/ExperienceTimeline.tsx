@@ -114,12 +114,22 @@ function ExperienceCard({
         <h3 className="text-sm font-semibold text-muted">{company}</h3>
         {uri && (
           <span
-            className={`inline-flex items-center gap-1 font-mono text-xs transition-opacity duration-200 ${
-              hovered ? 'opacity-100' : 'opacity-0'
-            } text-gold-deep`}
+            className={`inline-flex items-center gap-1.5 font-mono text-xs text-gold-deep transition-opacity duration-200 ${
+              hovered ? 'opacity-100' : 'md:opacity-0'
+            }`}
           >
-            <span className="h-px w-3 bg-gold-deep" />
-            has website
+            <img
+              src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(uri).hostname)}&sz=32`}
+              alt=""
+              width={16}
+              height={16}
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.hidden = true
+              }}
+              className="h-4 w-4 rounded-sm"
+            />
+            website
           </span>
         )}
       </div>
@@ -135,7 +145,9 @@ function ExperienceCard({
       {uri && (
         <div
           className={`mt-1 overflow-hidden transition-all duration-300 ${
-            hovered ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'
+            hovered
+              ? 'max-h-12 opacity-100'
+              : 'max-h-12 opacity-100 md:max-h-0 md:opacity-0'
           }`}
         >
           <a
