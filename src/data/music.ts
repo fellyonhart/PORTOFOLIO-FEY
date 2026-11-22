@@ -11,8 +11,10 @@ export const musicTracks: MusicTrack[] = [
     title: 'Egosentris',
     artist: 'alkateri',
   },
-  { src: '/music/Sway.m4a', title: 'Sway' },
-  { src: '/music/Merra.m4a', title: 'Merra' },
+  { src: '/music/Sway.m4a', title: 'Sway', 
+    artist: 'COLORCODE' },
+  { src: '/music/Merra.m4a', title: 'Merra', 
+      artist: 'COLORCODE' },
   {
     src: '/music/For All the Dreams That Wings Could Fly.m4a',
     title: 'For All the Dreams That Wings Could Fly',
