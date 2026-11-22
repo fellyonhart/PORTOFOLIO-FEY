@@ -12,9 +12,13 @@ type LyricsResponse = {
 
 const lyricsCache = new Map<string, LyricsResponse | null>()
 
-function activeSyncedLine(syncedLyrics: string, currentTime: number) {
+function activeSyncedLine(
+  syncedLyrics: string,
+  currentTime: number,
+  lyricOffset = 0,
+) {
   let activeLine = ''
-  let activeStart = -1
+  let activeStart = -Infinity
 
   for (const line of syncedLyrics.split(/\r?\n/)) {
     const timestampPattern = /\[(\d+):([0-5]\d)(?:[.:](\d{1,3}))?\]/g
@@ -31,8 +35,9 @@ function activeSyncedLine(syncedLyrics: string, currentTime: number) {
         Number(timestamp[1]) * 60 +
         Number(timestamp[2]) +
         (fraction ? Number(fraction) / 1000 : 0)
-      if (start <= currentTime && start >= activeStart) {
-        activeStart = start
+      const adjustedStart = start + lyricOffset
+      if (adjustedStart <= currentTime && adjustedStart >= activeStart) {
+        activeStart = adjustedStart
         activeLine = text
       }
     }
@@ -94,11 +99,17 @@ export default function LyricsTicker() {
   }, [isReady, track])
 
   const syncedLine =
-    lyrics?.syncedLyrics && activeSyncedLine(lyrics.syncedLyrics, currentTime)
+    lyrics?.syncedLyrics &&
+    activeSyncedLine(lyrics.syncedLyrics, currentTime, track?.lyricOffset)
   const plainLine = lyrics?.plainLyrics
     ?.split(/\r?\n/)
     .map((line) => line.trim())
-    .find(Boolean)
+    .filter(Boolean)
+  const plainIndex =
+    plainLine && plainLine.length > 0
+      ? Math.floor(currentTime / 6) % plainLine.length
+      : 0
+  const plainCurrentLine = plainLine?.[plainIndex]
   const text = loading
     ? 'Memuat lirik…'
     : error
@@ -107,7 +118,7 @@ export default function LyricsTicker() {
         ? 'Lirik tidak ditemukan'
         : lyrics.syncedLyrics
           ? syncedLine || '♫'
-          : plainLine || 'Lirik tidak ditemukan'
+          : plainCurrentLine || 'Lirik tidak ditemukan'
   const overflowDistance = overflow.text === text ? overflow.distance : 0
   const tickerStyle =
     overflowDistance > 0
@@ -140,7 +151,7 @@ export default function LyricsTicker() {
 
   return (
     <div
-      className="flex w-48 min-w-0 max-w-[calc(100vw-3rem)] items-center gap-2 text-muted"
+      className="lyrics-ticker flex h-9 w-44 min-w-0 max-w-[calc(100vw-3rem)] items-center gap-2 rounded-full border border-line-2 bg-card px-2.5 text-muted shadow-soft md:w-52"
       title={text}
       aria-label={`Lirik lagu: ${text}`}
     >

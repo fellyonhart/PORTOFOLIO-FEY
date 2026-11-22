@@ -754,6 +754,14 @@ samp {
    Keyframes
    ============================================================ */
 .lyrics-ticker__viewport {
+  height: 1.25rem;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 0.35rem,
+    #000 calc(100% - 0.35rem),
+    transparent 100%
+  );
   overflow: hidden;
   white-space: nowrap;
 }
