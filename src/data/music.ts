@@ -67,4 +67,9 @@ export const musicTracks: MusicTrack[] = [
     title: 'Whoa ',
     artist: 'XXXTENTACTION',
   },
+  {
+    src: '/music/Kukira Kau Rumah.mp3',
+    title: 'kukira kau rumah ',
+    artist: 'Amigdala',
+  },
 ]
