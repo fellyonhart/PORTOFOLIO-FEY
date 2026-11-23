@@ -15,7 +15,7 @@ export const musicTracks: MusicTrack[] = [
     src: '/music/Kaulah Kamuku - Fatin Shidqia feat. Mikha Angelo Lirik Lagu.mp3',
     title: 'Kaulah Kamuku',
     artist: 'Fatin ',
-    lyricOffset: 2,
+    lyricOffset: 10,
   },
   { src: '/music/Dunia Yang Nanti.m4a', title: 'Dunia Yang Nanti' },
   {
