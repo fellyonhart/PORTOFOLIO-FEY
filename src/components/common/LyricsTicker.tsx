@@ -151,7 +151,7 @@ export default function LyricsTicker() {
 
   return (
     <div
-      className="lyrics-ticker flex h-9 w-44 min-w-0 max-w-[calc(100vw-3rem)] items-center gap-2 rounded-full border border-line-2 bg-card px-2.5 text-muted shadow-soft md:w-52"
+      className="lyrics-ticker flex h-10 w-64 min-w-0 max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full border border-line bg-card px-3 text-ink shadow-md md:w-72"
       title={text}
       aria-label={`Lirik lagu: ${text}`}
     >

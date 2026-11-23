@@ -14,6 +14,7 @@ export default function Education() {
         text={profile.headings.education}
         eyebrow={sectionLabels.education}
         classNames="mb-10 text-center"
+        showHighlight={false}
       />
       <div className="mx-auto max-w-3xl">
         <EducationSection items={education} />

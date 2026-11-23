@@ -35,23 +35,12 @@ export default function Navbar({ socials }: NavbarProps) {
   }, [pathname])
 
   useEffect(() => {
-    let previousScrollY = window.scrollY
-
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      if (window.innerWidth < 1024 || currentScrollY <= 96) {
-        setCompactNavVisible(false)
-      } else if (currentScrollY > previousScrollY) {
-        setCompactNavVisible(true)
-      } else if (currentScrollY < previousScrollY) {
-        setCompactNavVisible(false)
-      }
-      previousScrollY = currentScrollY
+      setCompactNavVisible(window.innerWidth >= 1024 && window.scrollY > 96)
     }
 
     const handleResize = () => {
       setCompactNavVisible(window.innerWidth >= 1024 && window.scrollY > 96)
-      previousScrollY = window.scrollY
     }
 
     handleScroll()

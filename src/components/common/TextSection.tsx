@@ -3,6 +3,7 @@ type TextSectionProps = {
   icon?: string
   eyebrow?: string
   classNames?: string
+  showHighlight?: boolean
 }
 
 export default function TextSection({
@@ -10,6 +11,7 @@ export default function TextSection({
   text,
   icon,
   eyebrow,
+  showHighlight = true,
 }: TextSectionProps) {
   return (
     <div
@@ -22,7 +24,9 @@ export default function TextSection({
         </p>
       )}
       <p className="relative mx-auto w-fit text-2xl text-ink md:text-4xl">
-        <span className="absolute bottom-0 -z-10 h-6 w-3/4 -translate-x-3 -rotate-2 rounded-md bg-pearl" />
+        {showHighlight && (
+          <span className="absolute bottom-0 -z-10 h-6 w-3/4 -translate-x-3 -rotate-2 rounded-md bg-pearl" />
+        )}
         {icon && (
           <span className="mr-2 inline-block text-3xl md:text-[48px]">
             {icon}
