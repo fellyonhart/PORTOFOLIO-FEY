@@ -16,7 +16,7 @@ export default function Home() {
             {profile.greeting} <GreetingHand />
           </h1>
           <h2 className="mt-4 text-lg font-semibold text-muted sm:text-xl md:text-2xl">
-            I&apos;m a <span className="text-ink">Mobile Developer</span>
+            I&apos;m a <span className="text-ink">Full stack Developer</span>
           </h2>
         </div>
 

@@ -774,7 +774,7 @@ samp {
   animation: lyrics-enter 220ms ease-out both;
 }
 .lyrics-ticker__text--scroll {
-  animation: lyrics-marquee var(--lyrics-duration) linear 500ms infinite alternate;
+  animation: lyrics-marquee var(--lyrics-duration) linear 500ms forwards;
 }
 @keyframes lyrics-enter {
   from {
