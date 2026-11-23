@@ -10,6 +10,8 @@ export const projects: Project[] = [
     featured: true,
     year: 2026,
     repo: 'https://github.com/fellyonhart/HBD-V2',
+    contribution: 'Designed and implemented the full interactive experience.',
+    result: 'A single-page celebration with galleries, timeline, and motion effects.',
   },
   {
     title: 'HBD-web — Digital Birthday Letter',
@@ -19,6 +21,8 @@ export const projects: Project[] = [
     tech: ['React', 'GSAP', 'Lenis', 'Vite'],
     featured: true,
     repo: 'https://github.com/fellyonhart/HBD-web',
+    contribution: 'Built the password flow, animations, and responsive content sections.',
+    result: 'A polished digital letter optimized for sharing on mobile and desktop.',
   },
   {
     title: 'Pinnaz',
@@ -28,6 +32,8 @@ export const projects: Project[] = [
     tech: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'Lenis'],
     featured: true,
     repo: 'https://github.com/fellyonhart/Finrk-Web',
+    contribution: 'Created the shared-story interface and interactive gallery components.',
+    result: 'A cohesive personal archive for photos, stories, and letters.',
   },
   {
     title: 'To-do List',
@@ -37,6 +43,8 @@ export const projects: Project[] = [
     tech: ['HTML', 'CSS', 'JavaScript'],
     featured: true,
     repo: 'https://github.com/fellyonhart/TDO-LIST-cenah',
+    contribution: 'Implemented task categories, priorities, persistence, and JSON data transfer.',
+    result: 'A dependency-free productivity tool that works entirely in the browser.',
   },
   {
     title: 'duit.io',
@@ -47,7 +55,10 @@ export const projects: Project[] = [
     featured: true,
     year: 2026,
     demo: 'https://expense-tracker-nfy.vercel.app',
+    image: '/projects/duit-io.gif',
     repo: 'https://github.com/fellyonhart/Expanse-tracker-duit',
+    contribution: 'Built the transaction flow and local data persistence.',
+    result: 'Clear income, expense, and balance summaries in a lightweight interface.',
   },
   {
     title: 'Scuba Dance',
@@ -58,7 +69,10 @@ export const projects: Project[] = [
     featured: true,
     year: 2026,
     demo: 'https://kicawz.vercel.app',
+    image: '/projects/scuba-dance.png',
     repo: 'https://github.com/fellyonhart/scuba-dance',
+    contribution: 'Integrated hand tracking with an interactive Canvas 2D scene.',
+    result: 'A browser-based visual experience controlled through webcam gestures.',
   },
   {
     title: 'Nilai Cek',
@@ -82,12 +96,13 @@ export const projects: Project[] = [
   {
     title: 'PPLG Virtual Lab',
     description:
-      'An interactive JavaScript learning lab with loop simulations, visual traces, quizzes, and XP-based progress.',
+      'A JavaScript learning lab prototype with loop simulations, visual traces, quizzes, and XP-based progress. Public demo access is paused until authentication and student-data handling are secured.',
     type: 'Web',
     tech: ['JavaScript'],
     featured: true,
     year: 2026,
-    demo: 'https://pplglab.vercel.app/labvirtual.html?view=lab',
+    contribution: 'Designed the learning flow and interactive code demonstrations.',
+    result: 'A safe prototype for JavaScript practice without exposing student records.',
   },
   {
     title: 'Kelompok 3 — Hasil Pembelajaran',
@@ -98,5 +113,6 @@ export const projects: Project[] = [
     featured: true,
     year: 2026,
     demo: 'https://klompoktilu.vercel.app/index.html',
+    image: '/projects/kelompok-3.png',
   },
 ]

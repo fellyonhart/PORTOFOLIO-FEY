@@ -2,11 +2,12 @@ import type { Education } from './types'
 
 export const education: Education[] = [
   {
-    title: 'C++ Fundamentals',
+    title: 'Programming Fundamentals',
+    company: 'Independent study',
     type: 'self-study',
     year: '2024',
     description:
-      'Started learning programming independently, beginning with C++ fundamentals.',
+      'Built a foundation in programming logic and C++ fundamentals.',
   },
   {
     title: 'HTML, CSS & JavaScript',

@@ -1,6 +1,16 @@
 import { socials } from '@/data/socials'
 import { profile } from '@/data/profile'
 import SocialIcon from '@/components/common/SocialIcon'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Contact | Fitra Pradipta',
+  description: 'Contact Fitra Pradipta for development opportunities and collaborations.',
+  openGraph: {
+    title: 'Contact Fitra Pradipta',
+    description: 'Open to opportunities and collaborations.',
+  },
+}
 
 export default function Contact() {
   const email =

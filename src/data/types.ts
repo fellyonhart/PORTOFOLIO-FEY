@@ -65,6 +65,8 @@ export type Project = {
   year?: number
   demo?: string
   repo?: string
+  contribution?: string
+  result?: string
 }
 
 export type Skill = {

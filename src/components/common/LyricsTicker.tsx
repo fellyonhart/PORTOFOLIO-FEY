@@ -113,9 +113,9 @@ export default function LyricsTicker() {
   const text = loading
     ? 'Memuat lirik…'
     : error
-      ? 'Lirik sementara tidak tersedia'
+      ? 'Lirik belum dapat dimuat'
       : !lyrics
-        ? 'Lirik tidak ditemukan'
+        ? 'Lirik belum tersedia untuk lagu ini'
         : lyrics.syncedLyrics
           ? syncedLine || '♫'
           : plainCurrentLine || 'Lirik tidak ditemukan'

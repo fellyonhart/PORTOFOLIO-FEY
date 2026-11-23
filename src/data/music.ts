@@ -6,6 +6,17 @@ export type MusicTrack = {
 }
 
 export const musicTracks: MusicTrack[] = [
+  {
+    src: '/music/DENNY CAKNAN - NEGORO ANGIN (Official Music Video).mp3',
+    title: 'Negoro Angin',
+    artist: 'Denny Caknan',
+  },
+  {
+    src: '/music/Kaulah Kamuku - Fatin Shidqia feat. Mikha Angelo Lirik Lagu.mp3',
+    title: 'Kaulah Kamuku',
+    artist: 'Fatin ',
+    lyricOffset: 2,
+  },
   { src: '/music/Dunia Yang Nanti.m4a', title: 'Dunia Yang Nanti' },
   {
     src: '/music/alkateri - Egosentris .m4a',
@@ -71,5 +82,25 @@ export const musicTracks: MusicTrack[] = [
     src: '/music/Kukira Kau Rumah.mp3',
     title: 'kukira kau rumah ',
     artist: 'Amigdala',
+  },
+  {
+    src: '/music/Aku Milikmu - Dewa 19 (Lyrics Video).mp3',
+    title: 'Aku Milikmu',
+    artist: 'Dewa 19',
+  },
+  {
+    src: '/music/Dewa 19 - Restoe Bumi Official Audio Video.mp3',
+    title: 'Restoe Bumi',
+    artist: 'Dewa 19',
+  },
+  {
+    src: '/music/Sampai Jadi Debu (Menampilkan Gardika Gigih).mp3',
+    title: 'Sampai Jadi Debu',
+    artist: 'Banda Neira',
+  },
+  {
+    src: '/music/Tell Me How - Snuzzle (official lyrics video).mp3',
+    title: 'Tell Me How',
+    artist: 'Snuzzle',
   },
 ]

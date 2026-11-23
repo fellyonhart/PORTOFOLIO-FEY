@@ -2,30 +2,30 @@ import type { Experience } from './types'
 
 export const experience: Experience[] = [
   {
-    title: 'Study at SMK WIKRAMA BOGOR',
-    company: 'becoming a PPLG student',
+    title: 'PPLG Student',
+    company: 'SMK Wikrama Bogor',
     type: 'education',
-    date: '2026 - Now',
+    date: '2026 — Present',
     description:
-      'Learning About Algorithm,flowchart and make design from Figma and mock up plus, for example learning about UI/UX.',
+      'Studying algorithms, flowcharts, UI/UX, web technologies, databases, and software development through practical assignments.',
     uri: 'https://smkwikrama.sch.id/berita/apa-itu-jurusan-pplg-apa-saja-keunggulan-jurusan-pplg',
   },
   {
-    title: 'Full Stack Developer Intern',
-    company: 'Learn Full Stack ',
+    title: 'Full-Stack Development Learning',
+    company: 'Independent study',
     type: 'education',
-    date: 'Aug 2025 - Now',
+    date: 'Aug 2025 — Present',
     description:
-      'An introduction to the world of web technology, including tools such as HTML, CSS, JS, and SQLite.',
+      'Building web applications with HTML, CSS, JavaScript, React, Next.js, Node.js, and SQLite while applying version control and deployment workflows.',
     uri: 'https://www.dicoding.com/blog/menjadi-full-stack-developer-yang-andal/',
   },
   {
-    title: 'from start',
-    company: 'Amaliah',
+    title: 'Started Learning to Code',
+    company: 'Independent study',
     type: 'education',
-    date: '2023 - present',
+    date: '2023 — Present',
     description:
-      'Starting to get interested in the world of websites and have begun looking for information on how to build one and start with using C++ language cause wanna get game dev for the first time.',
+      'Started with C++ out of interest in game development, then progressed to web technologies and broader software development.',
     uri: '',
   },
 ]

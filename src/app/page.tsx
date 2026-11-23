@@ -16,7 +16,8 @@ export default function Home() {
             {profile.greeting} <GreetingHand />
           </h1>
           <h2 className="mt-4 text-lg font-semibold text-muted sm:text-xl md:text-2xl">
-            I&apos;m a <span className="text-ink">Full stack Developer</span>
+            <span className="text-ink">Software Developer</span>{' '}
+            <span aria-hidden="true">·</span> Web &amp; Full-Stack
           </h2>
         </div>
 
@@ -33,15 +34,14 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap gap-3">
-          <div
-            role="status"
+          <Link
+            href="/resume"
+            aria-label="View resume"
             className="flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-3 text-muted shadow-soft"
           >
-            <i className="fa-solid fa-hammer text-xs" aria-hidden="true" />
-            <span className="text-sm font-semibold">
-              Resume — Dalam Pembuatan
-            </span>
-          </div>
+            <i className="fa-solid fa-file-lines text-xs" aria-hidden="true" />
+            <span className="text-sm font-semibold">View Resume</span>
+          </Link>
           <Link
             href="/about"
             className="flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-3 text-ink shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:border-gold-deep hover:text-gold-deep"

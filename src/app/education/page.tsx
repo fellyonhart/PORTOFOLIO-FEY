@@ -6,6 +6,16 @@ import { certificates } from '@/data/certificates'
 import { education } from '@/data/education'
 import { profile } from '@/data/profile'
 import { sectionLabels } from '@/data/site'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Education | Fitra Pradipta',
+  description: 'Education and learning timeline for Fitra Pradipta, PPLG student at SMK Wikrama Bogor.',
+  openGraph: {
+    title: 'Education & Learning',
+    description: 'Programming studies, coursework, and PPLG education.',
+  },
+}
 
 export default function Education() {
   return (

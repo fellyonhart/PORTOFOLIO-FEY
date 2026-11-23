@@ -118,17 +118,7 @@ function ExperienceCard({
               hovered ? 'opacity-100' : 'md:opacity-0'
             }`}
           >
-            <img
-              src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(new URL(uri).hostname)}&sz=32`}
-              alt=""
-              width={16}
-              height={16}
-              loading="lazy"
-              onError={(event) => {
-                event.currentTarget.hidden = true
-              }}
-              className="h-4 w-4 rounded-sm"
-            />
+            <ExternalLinkIcon />
             website
           </span>
         )}

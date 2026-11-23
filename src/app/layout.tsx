@@ -26,12 +26,23 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   title: `${profile.name} | Portfolio`,
-  description: `${profile.name} — Fullstack Developer from Indonesia.`,
+  description: `${profile.name} — Software Developer and PPLG student from Indonesia.`,
+  keywords: ['Fitra Pradipta', 'software developer', 'full-stack developer', 'PPLG', 'Indonesia'],
+  authors: [{ name: profile.name }],
   openGraph: {
     title: `${profile.name} | Portfolio`,
-    description: 'Fullstack Developer from Indonesia.',
+    description: 'Software Developer and PPLG student building accessible web experiences.',
     type: 'website',
+    siteName: 'Feyy.Dev',
+    locale: 'en_US',
+    images: [{ url: '/me.png', width: 300, height: 300, alt: profile.name }],
+  },
+  twitter: {
+    card: 'summary',
+    title: `${profile.name} | Portfolio`,
+    description: 'Software Developer and PPLG student from Indonesia.',
   },
   icons: {
     icon: '/favicon.svg',

@@ -5,6 +5,16 @@ import TechIcon from '@/components/common/TechIcon'
 import { experience } from '@/data/experience'
 import { profile } from '@/data/profile'
 import { skills } from '@/data/skills'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About | Fitra Pradipta',
+  description: 'Learn about Fitra Pradipta, PPLG student and software developer focused on modern web development.',
+  openGraph: {
+    title: 'About Fitra Pradipta',
+    description: 'PPLG student, software developer, and web enthusiast.',
+  },
+}
 
 export default function About() {
   return (
@@ -106,7 +116,7 @@ export default function About() {
           {profile.headings.skills}
         </h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {/* Languages */}
           <SkillGroup
             category="Languages"
@@ -119,17 +129,25 @@ export default function About() {
             items={[
               'React',
               'NextJS',
+              'Express',
               'NodeJS',
             ]}
             allSkills={skills}
           />
           {/* Tools */}
           <SkillGroup
-            category="Tools & DB"
+            category="Tools & Data"
             items={[
               'Tailwinds',
+              'Framer',
               'SQLite',
+              'MongoDB',
             ]}
+            allSkills={skills}
+          />
+          <SkillGroup
+            category="Animation & Build"
+            items={['GSAP', 'Lenis', 'Vite']}
             allSkills={skills}
           />
         </div>

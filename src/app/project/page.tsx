@@ -1,6 +1,17 @@
 import { projects } from '@/data/projects'
 import { profile } from '@/data/profile'
 import TechIcon from '@/components/common/TechIcon'
+import Image from 'next/image'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Projects | Fitra Pradipta',
+  description: 'Featured web projects by Fitra Pradipta, including interactive experiences and practical applications.',
+  openGraph: {
+    title: 'Featured Projects',
+    description: 'Selected web development projects and results.',
+  },
+}
 
 export default function ProjectPage() {
   const featured = [...projects].reverse().filter((p) => p.featured !== false)
@@ -15,8 +26,8 @@ export default function ProjectPage() {
         {profile.headings.projects}
       </h1>
       <p className="mb-12 max-w-xl text-sm text-muted">
-        A selection of things I&apos;ve built — from side projects to client
-        work.
+        A selection of web projects covering interaction design, frontend
+        development, persistence, and deployment.
       </p>
 
       {/* Featured grid */}
@@ -54,6 +65,25 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
         {project.type?.toLowerCase() ?? 'project'}
       </span>
 
+      {project.demo && project.image && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`View ${project.title} demo`}
+          className="mb-5 block overflow-hidden rounded-lg border border-line"
+        >
+          <Image
+            src={project.image}
+            alt={`${project.title} website preview`}
+            width={1000}
+            height={650}
+            unoptimized
+            className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+        </a>
+      )}
+
       {/* Title */}
       <h2 className="mb-2 text-lg font-bold text-ink transition-colors group-hover:text-ice">
         {project.title}
@@ -64,6 +94,23 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
         <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-muted">
           {project.description}
         </p>
+      )}
+
+      {(project.contribution || project.result) && (
+        <dl className="mb-5 space-y-2 border-l border-line-2 pl-3">
+          {project.contribution && (
+            <div>
+              <dt className="font-mono text-[10px] uppercase tracking-widest text-ice">Contribution</dt>
+              <dd className="mt-1 text-xs leading-relaxed text-muted">{project.contribution}</dd>
+            </div>
+          )}
+          {project.result && (
+            <div>
+              <dt className="font-mono text-[10px] uppercase tracking-widest text-ice">Result</dt>
+              <dd className="mt-1 text-xs leading-relaxed text-muted">{project.result}</dd>
+            </div>
+          )}
+        </dl>
       )}
 
       {/* Tech stack */}
@@ -79,15 +126,15 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
       )}
 
       {/* Links */}
-      <div className="flex items-center gap-4 font-mono text-xs">
+      <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
         {openHref && openHref !== 'none' && openHref !== project.repo && (
           <a
             href={openHref}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1 text-ice hover:underline"
+            className="inline-flex min-h-9 items-center gap-2 rounded-md border border-ice px-3 py-2 font-semibold text-ice transition-colors hover:bg-ice hover:text-bg"
           >
-            Live Demo
+            Demo
             <i className="fa-solid fa-arrow-up-right-from-square text-[10px]" />
           </a>
         )}
@@ -96,10 +143,10 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
             href={project.repo}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1 text-muted hover:text-ice"
+            className="inline-flex min-h-9 items-center gap-2 rounded-md border border-line px-3 py-2 font-semibold text-muted transition-colors hover:border-ice hover:text-ice"
           >
             <i className="fa-brands fa-github text-xs" />
-            Source
+            Source Code
           </a>
         )}
         {project.year && (

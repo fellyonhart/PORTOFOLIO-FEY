@@ -25,6 +25,8 @@ export default function RandomMusicPlayer() {
   const setCurrentTime = useSetMusicTime()
   const [error, setError] = useState('')
   const [mobileControlsOpen, setMobileControlsOpen] = useState(false)
+  const [trackPickerOpen, setTrackPickerOpen] = useState(false)
+  const [trackQuery, setTrackQuery] = useState('')
 
   useEffect(() => {
     if (initializedRef.current) return
@@ -59,6 +61,11 @@ export default function RandomMusicPlayer() {
   }
 
   const playRandomTrack = () => playTrack(randomTrack(currentTrack))
+  const filteredTracks = musicTracks.filter((track) =>
+    `${track.title} ${track.artist ?? ''}`
+      .toLowerCase()
+      .includes(trackQuery.trim().toLowerCase()),
+  )
 
   const togglePlayback = async () => {
     const audio = audioRef.current
@@ -99,6 +106,88 @@ export default function RandomMusicPlayer() {
           setMobileControlsOpen(true)
         }}
       />
+      {trackPickerOpen && (
+        <section
+          id="music-track-picker"
+          aria-label="Choose a music track"
+          className="absolute bottom-full right-0 mb-3 flex max-h-[55svh] w-80 max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-soft"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') setTrackPickerOpen(false)
+          }}
+        >
+          <div className="border-b border-line p-3">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h2 className="text-sm font-semibold text-ink">Choose a song</h2>
+                <p className="font-mono text-[10px] text-muted">
+                  {musicTracks.length} tracks
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setTrackPickerOpen(false)}
+                aria-label="Close song list"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted hover:bg-bg-2 hover:text-ink"
+              >
+                <i className="fa-solid fa-xmark" aria-hidden="true" />
+              </button>
+            </div>
+            <label className="sr-only" htmlFor="music-track-search">
+              Search songs
+            </label>
+            <input
+              id="music-track-search"
+              type="search"
+              value={trackQuery}
+              onChange={(event) => setTrackQuery(event.target.value)}
+              placeholder="Search songs or artists"
+              className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-ink outline-none placeholder:text-muted focus-visible:ring-2 focus-visible:ring-gold"
+            />
+          </div>
+          <ul className="min-h-0 overflow-y-auto p-2" aria-label="Songs">
+            {filteredTracks.map((track) => {
+              const isCurrentTrack = track.src === currentTrack
+              return (
+                <li key={track.src}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTrackPickerOpen(false)
+                      void playTrack(track.src)
+                    }}
+                    aria-current={isCurrentTrack ? 'true' : undefined}
+                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ${
+                      isCurrentTrack
+                        ? 'bg-tech-tag text-ink'
+                        : 'text-muted hover:bg-bg-2 hover:text-ink'
+                    }`}
+                  >
+                    <i
+                      className={`fa-solid ${isCurrentTrack && isPlaying ? 'fa-volume-high' : 'fa-music'} w-4 shrink-0 text-xs text-gold`}
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-semibold">
+                        {track.title}
+                      </span>
+                      {track.artist && (
+                        <span className="block truncate text-xs text-muted">
+                          {track.artist}
+                        </span>
+                      )}
+                    </span>
+                  </button>
+                </li>
+              )
+            })}
+            {filteredTracks.length === 0 && (
+              <li className="px-3 py-6 text-center text-sm text-muted">
+                No songs found.
+              </li>
+            )}
+          </ul>
+        </section>
+      )}
       <div
         className={`${mobileControlsOpen ? 'flex' : 'hidden'} min-w-0 items-center gap-1 sm:flex sm:gap-2`}
       >
@@ -110,18 +199,17 @@ export default function RandomMusicPlayer() {
             {error}
           </span>
         )}
-        <select
-          aria-label="Select music track"
-          value={currentTrack}
-          onChange={(event) => void playTrack(event.target.value)}
-          className="w-28 min-w-0 max-w-[32vw] truncate rounded-full border border-line bg-card px-2 py-3 text-xs text-ink shadow-soft outline-none transition-colors hover:border-gold focus-visible:ring-2 focus-visible:ring-gold sm:w-36 sm:max-w-[40vw] sm:px-3"
+        <button
+          type="button"
+          onClick={() => setTrackPickerOpen((open) => !open)}
+          aria-label={`Choose song. Current song: ${trackTitle(currentTrack)}`}
+          aria-expanded={trackPickerOpen}
+          aria-controls="music-track-picker"
+          className="flex min-w-0 w-28 max-w-[32vw] items-center gap-2 rounded-full border border-line bg-card px-3 py-3 text-left text-xs text-ink shadow-soft outline-none transition-colors hover:border-gold focus-visible:ring-2 focus-visible:ring-gold sm:w-36 sm:max-w-[40vw]"
         >
-          {tracks.map((track) => (
-            <option key={track} value={track}>
-              {trackTitle(track)}
-            </option>
-          ))}
-        </select>
+          <i className="fa-solid fa-list shrink-0 text-gold" aria-hidden="true" />
+          <span className="truncate">{trackTitle(currentTrack)}</span>
+        </button>
         <button
           type="button"
           onClick={() => void togglePlayback()}
