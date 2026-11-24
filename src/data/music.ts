@@ -103,4 +103,9 @@ export const musicTracks: MusicTrack[] = [
     title: 'Tell Me How',
     artist: 'Snuzzle',
   },
+  {
+    src: '/music/Glenn Fredly - Romansa Ke Masa Depan (Official Lyric Video).mp3',
+    title: 'Romansa Ke masa depan',
+    artist: 'Glenn Fredly',
+  },
 ]
