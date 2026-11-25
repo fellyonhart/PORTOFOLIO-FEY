@@ -10,17 +10,10 @@ export default function CertificatePreview({
   certificate: Certificate
 }) {
   const [imageMissing, setImageMissing] = useState(false)
-  const isPdf = certificate.file.toLowerCase().endsWith('.pdf')
 
   return (
     <div className="relative aspect-[1.414] overflow-hidden border-b border-line bg-bg-2">
-      {isPdf ? (
-        <iframe
-          title={`${certificate.title} certificate preview`}
-          src={`${certificate.file}#toolbar=0&navpanes=0&scrollbar=0`}
-          className="h-full w-full"
-        />
-      ) : imageMissing ? (
+      {imageMissing ? (
         <div className="flex h-full flex-col items-center justify-center gap-2 px-4 text-center text-muted">
           <i className="fa-regular fa-image text-2xl" aria-hidden="true" />
           <p className="text-sm font-medium">Certificate preview</p>
