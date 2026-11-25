@@ -20,6 +20,13 @@ export default function Resume() {
         <p className="mt-4 max-w-2xl leading-relaxed text-muted">
           Indonesia-based developer focused on accessible web experiences, frontend development, and practical full-stack applications.
         </p>
+        <a
+          href="/cv.pdf"
+          download="Fitra-Pradipta-CV.pdf"
+          className="mt-6 inline-flex min-h-10 items-center rounded-md border border-ice px-4 py-2 font-mono text-xs font-semibold text-ice transition-colors hover:bg-ice hover:text-bg"
+        >
+          Download CV
+        </a>
       </header>
 
       <div className="grid gap-10 py-10 md:grid-cols-[1fr_240px]">

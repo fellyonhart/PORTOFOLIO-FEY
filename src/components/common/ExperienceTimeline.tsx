@@ -83,7 +83,8 @@ function ExperienceCard({
   description,
   type,
   uri,
-}: Experience) {
+  isSingle,
+}: Experience & { isSingle: boolean }) {
   const [hovered, setHovered] = useState(false)
   const isWork = type === 'work'
 
@@ -100,7 +101,7 @@ function ExperienceCard({
             isWork ? 'bg-ice/10 text-ice' : 'bg-lembayung/10 text-lembayung'
           }`}
         >
-          {isWork ? <WorkIcon /> : <EduIcon />}
+          {!isSingle && (isWork ? <WorkIcon /> : <EduIcon />)}
           {isWork ? 'Work' : 'Education'}
         </span>
         <span className="font-mono text-xs text-muted">{date}</span>
@@ -165,15 +166,26 @@ function ExperienceCard({
 
 // ── Main export — vertical timeline layout ───────────────────────────────────
 export default function ExperienceTimeline(
-  props: Experience & { position: boolean; isLast: boolean },
+  props: Experience & {
+    isLast: boolean
+    isSingle: boolean
+  },
 ) {
-  const { isLast, ...rest } = props
+  const { isLast, isSingle, ...rest } = props
 
   return (
-    <div className="group flex gap-4">
+    <div
+      className={
+        isSingle
+          ? 'group flex flex-col items-center gap-3'
+          : 'group flex gap-4'
+      }
+    >
       <TimelineDot type={props.type} isLast={isLast} />
-      <div className="mb-6 flex-1 pt-1">
-        <ExperienceCard {...rest} />
+      <div
+        className={`mb-6 ${isSingle ? 'w-full' : 'flex-1 pt-1'}`}
+      >
+        <ExperienceCard {...rest} isSingle={isSingle} />
       </div>
     </div>
   )

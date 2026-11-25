@@ -95,12 +95,12 @@ export default function About() {
         <h2 className="mb-10 text-2xl font-bold md:text-4xl">
           {profile.headings.experience}
         </h2>
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-2xl">
           {[...experience].reverse().map((item, index, arr) => (
             <ExperienceTimeline
               key={index}
-              position={index % 2 === 1}
               isLast={index === arr.length - 1}
+              isSingle={arr.length === 1}
               {...item}
             />
           ))}

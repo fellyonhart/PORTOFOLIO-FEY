@@ -108,4 +108,9 @@ export const musicTracks: MusicTrack[] = [
     title: 'Romansa Ke masa depan',
     artist: 'Glenn Fredly',
   },
+  {
+    src: '/music/Lomba Sihir - Ribuan Memori (Official Lyric Video).mp3',
+    title: 'Ribuan Memori',
+    artist: 'Lomba Sihir',
+  },
 ]

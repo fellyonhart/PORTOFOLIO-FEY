@@ -9,6 +9,7 @@ export const projects: Project[] = [
     tech: ['React', 'TypeScript', 'GSAP'],
     featured: true,
     year: 2026,
+    image: '/projects/HBDV2.png',
     repo: 'https://github.com/fellyonhart/HBD-V2',
     contribution: 'Designed and implemented the full interactive experience.',
     result: 'A single-page celebration with galleries, timeline, and motion effects.',
@@ -20,6 +21,7 @@ export const projects: Project[] = [
     type: 'Web',
     tech: ['React', 'GSAP', 'Lenis', 'Vite'],
     featured: true,
+    image: '/projects/HBDV1.png',
     repo: 'https://github.com/fellyonhart/HBD-web',
     contribution: 'Built the password flow, animations, and responsive content sections.',
     result: 'A polished digital letter optimized for sharing on mobile and desktop.',
@@ -31,6 +33,7 @@ export const projects: Project[] = [
     type: 'Web',
     tech: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'Lenis'],
     featured: true,
+    image: '/projects/finnaz.png',
     repo: 'https://github.com/fellyonhart/Finrk-Web',
     contribution: 'Created the shared-story interface and interactive gallery components.',
     result: 'A cohesive personal archive for photos, stories, and letters.',
@@ -77,11 +80,12 @@ export const projects: Project[] = [
   {
     title: 'Nilai Cek',
     description:
-      'A lightweight vanilla JavaScript app for recording exam scores and calculating averages, with localStorage persistence.',
+      'A student grade portal for recording subject scores per student, calculating averages, and managing saved student records in the browser.',
     type: 'Web',
     tech: ['JavaScript'],
     featured: false,
     year: 2026,
+    image: '/projects/cek-nilai.png',
     repo: 'https://github.com/fellyonhart/NILAI-CEKKK',
   },
   {
@@ -101,6 +105,7 @@ export const projects: Project[] = [
     tech: ['JavaScript'],
     featured: true,
     year: 2026,
+    image: '/projects/pplg-lab.png',
     contribution: 'Designed the learning flow and interactive code demonstrations.',
     result: 'A safe prototype for JavaScript practice without exposing student records.',
   },
@@ -114,5 +119,23 @@ export const projects: Project[] = [
     year: 2026,
     demo: 'https://klompoktilu.vercel.app/index.html',
     image: '/projects/kelompok-3.png',
+  },
+  {
+    title: 'KopiPlan',
+    description:
+      'A coffee-business planning site that simulates operational costs, cost per cup (HPP), recommended selling price, and daily sales targets for 12–14 oz drinks, presented in a financial snapshot dashboard.',
+    type: 'Web',
+    featured: true,
+    year: 2026,
+    image: '/projects/cafe.png',
+  },
+  {
+    title: 'Surat dari Botol',
+    description:
+      'An interactive letter-in-a-bottle experience where visitors open a floating bottle to reveal a personal letter, wrapped in a calm, cinematic maritime theme.',
+    type: 'Web',
+    featured: true,
+    year: 2026,
+    image: '/projects/confessbtl.png',
   },
 ]
